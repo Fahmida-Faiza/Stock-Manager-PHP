@@ -122,39 +122,24 @@ $result = mysqli_query($conn, $sql);
 while($row = mysqli_fetch_assoc($result)){
   echo "<tr>
     <th scope='row'>" . $row['sno'] ."</th>
-    
-    <td>" .  $row['date']. "</td>    
-    <td>" .  $row['source']; "</td>
-    <td>" .  $row['model']; "</td>
-    <td>" .  $row['ram']; "</td>
-    <td>" .  $row['ime']; "</td>
-    <td>" .  $row['buying']; "</td>
-    
+    <td>" . $row['date'] . "</td>    
+    <td>" . $row['source'] . "</td>
+    <td>" . $row['model'] . "</td>
+    <td>" . $row['ram'] . "</td>
+    <td>" . $row['ime'] . "</td>
+    <td>" . $row['buying'] . "</td>
     <td>Action</td>
   </tr>";
 }
+
+
 
 ?>
 
 
 
 
-          <!-- <tr class="hover:bg-gray-50 transition-all duration-150">
-            <td>1</td>
-            <td>2025-10-03</td>
-            <td>Local Shop</td>
-            <td>iPhone 15</td>
-            <td>8/128GB</td>
-            <td>123456789012345</td>
-            <td>$800</td>
-            <td>$1000</td>
-            <td>$200</td>
-            <td><span class="badge badge-success">Available</span></td>
-            <td class="flex gap-2">
-              <button class="btn btn-sm btn-info">Edit</button>
-              <button class="btn btn-sm btn-error">Delete</button>
-            </td>
-          </tr> -->
+       
        
         </tbody>
       </table>
