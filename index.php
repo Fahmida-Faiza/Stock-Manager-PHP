@@ -52,6 +52,18 @@ if (!$conn){
   <!-- Tailwind + DaisyUI CDN -->
   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- datatable -->
+<link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css.css">
+<script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+
+
+
+
+
+<!--  -->
+
+
 </head>
 <body class="p-5 bg-white">
 
@@ -95,11 +107,18 @@ if (!$conn){
   <!-- Responsive Product Table -->
   <div class="mt-6">
     <!-- Desktop Table -->
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
+
     <div class="hidden md:block overflow-x-auto shadow-lg rounded-lg border">
-      <table class="table table-compact w-full">
+      <table  id="myTable"  class="table table-compact w-full   ">
         <thead class="bg-gray-200">
           <tr>
-            <th>#</th>
+            <th>SNo</th>
             <th>Date</th>
             <th>Source</th>
             <th>Model</th>
@@ -119,9 +138,11 @@ if (!$conn){
 
 $sql = "SELECT * FROM `stock`";
 $result = mysqli_query($conn, $sql);
+$sno = 0;
 while($row = mysqli_fetch_assoc($result)){
+  $sno= $sno + 1;
   echo "<tr>
-    <th scope='row'>" . $row['sno'] ."</th>
+    <th scope='row'>" .$sno ."</th>
     <td>" . $row['date'] . "</td>    
     <td>" . $row['source'] . "</td>
     <td>" . $row['model'] . "</td>
@@ -143,9 +164,16 @@ while($row = mysqli_fetch_assoc($result)){
        
         </tbody>
       </table>
+
+
+      <script>
+  let table = new DataTable('#myTable');
+
+</script>
     </div>
 
- 
+
+
 
 </body>
 </html>
