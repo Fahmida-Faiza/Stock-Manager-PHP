@@ -125,9 +125,9 @@ if (!$conn){
             <th>RAM/ROM</th>
             <th>IMEI</th>
             <th>Buying Price</th>
-            <th>Selling Price</th>
+            <!-- <th>Selling Price</th>
             <th>Profit</th>
-            <th>Status</th>
+            <th>Status</th> -->
             <th>Action</th>
           </tr>
         </thead>
@@ -149,7 +149,8 @@ while($row = mysqli_fetch_assoc($result)){
     <td>" . $row['ram'] . "</td>
     <td>" . $row['ime'] . "</td>
     <td>" . $row['buying'] . "</td>
-    <td>Action</td>
+ 
+    <td> <a  class='edit' id=" .$row['sno']."   href = 'edit.php'>Edit </a> <a  href='/del'>Delete</a></td>
   </tr>";
 }
 
@@ -170,6 +171,50 @@ while($row = mysqli_fetch_assoc($result)){
   let table = new DataTable('#myTable');
 
 </script>
+
+<!-- edit -->
+
+
+
+
+
+
+
+
+ <script>
+
+ 
+  let edits = document.getElementsByClassName('edit');
+
+  Array.from(edits).forEach((element) => {
+    element.addEventListener("click", (e) => {
+      console.log("Edit clicked");
+
+      let tr = e.target.parentNode.parentNode;
+      let date = tr.getElementsByTagName("td")[0].innerText;
+      let source = tr.getElementsByTagName("td")[1].innerText;
+      let model = tr.getElementsByTagName("td")[2].innerText;
+
+      console.log(date, source, model);
+
+        dateEdit.value= date;
+        sourceEdit.value= source;
+        modelEdit.value=model;
+        snoEdit.value= e.target.id;
+        console.log(e.target.id);
+
+
+    });
+  });
+</script>
+
+
+</script>
+<!-- edit end -->
+
+
+
+
     </div>
 
 
