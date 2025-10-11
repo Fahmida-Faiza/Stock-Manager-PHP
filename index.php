@@ -149,8 +149,10 @@ while($row = mysqli_fetch_assoc($result)){
     <td>" . $row['ram'] . "</td>
     <td>" . $row['ime'] . "</td>
     <td>" . $row['buying'] . "</td>
- 
-    <td> <a  class='edit' id=" .$row['sno']."   href = 'edit.php'>Edit </a> <a  href='/del'>Delete</a></td>
+
+    <td> <a  class='edit' href='edit.php?id=".$row['sno']."'>Edit </a>
+     <a  href='/del'>Delete</a>
+     </td>
   </tr>";
 }
 
@@ -188,7 +190,7 @@ while($row = mysqli_fetch_assoc($result)){
 
   Array.from(edits).forEach((element) => {
     element.addEventListener("click", (e) => {
-      console.log("Edit clicked");
+      console.log("Edit ");
 
       let tr = e.target.parentNode.parentNode;
       let date = tr.getElementsByTagName("td")[0].innerText;

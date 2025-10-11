@@ -10,10 +10,14 @@ if (!$conn){
   die("sorry" . mysqli_connect_error());
 
 }
+$sno = $_GET['id'];
+$sql = "SELECT * FROM stock WHERE sno = $sno";
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
 
 
-
-
+// Convert full datetime to YYYY-MM-DD for the date input
+$dateValue = date('Y-m-d', strtotime($row['date']));
 
 
 
@@ -59,25 +63,35 @@ if (!$conn){
 
 
 
-    <form method="POST" action="/Stock%20Manager%20PHP/add_product.php" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<input type="hidden"   name="snoEdit"  id="snoEdit" >
+    <form method="POST" action="/Stock%20Manager%20PHP/add_product.php?" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<input type="hidden"   name="snoEdit"  id="snoEdit"   value="<?php echo $sno; ?>" >
 
+<input type="hidden" name="snoEdit" value="<?php echo $row['sno']; ?>">
 <!-- Date -->
       <div>
         <label class="label"><span class="label-text">Date</span></label>
-        <input type="date" name="dateEdit" id="dateEdit" class="input input-bordered bg-white w-full" required>
+       
+          <input 
+    type="date" 
+    name="dateEdit" 
+    id="dateEdit" 
+    class="input input-bordered bg-white w-full" 
+    value="<?php echo $dateValue; ?>" 
+    required
+  >
+
       </div>
 
       <!-- Source -->
       <div>
         <label class="label"><span class="label-text">Source</span></label>
-        <input type="text" name="sourceEdit" id="sourceEdit" class="input input-bordered bg-white w-full" placeholder="Source">
+        <input type="text" name="sourceEdit" id="sourceEdit"      value="<?php echo $row['source']; ?>"       class="input input-bordered bg-white w-full" placeholder="Source">
       </div>
 
       <!-- Model -->
       <div>
         <label class="label"><span class="label-text">Model</span></label>
-        <input type="text" name="modelEdit" id="modelEdit" class="input input-bordered bg-white w-full" placeholder="Model">
+        <input type="text" name="modelEdit" id="modelEdit" class="input input-bordered bg-white w-full"    value="<?php echo $row['model']; ?>"  placeholder="Model">
       </div>
 
       <!-- RAM/ROM -->

@@ -37,6 +37,12 @@ else{
 }
 }
 
+
+
+
+
+
+
 ?>
 
 
@@ -103,7 +109,7 @@ else{
       <!-- Date -->
       <div>
         <label class="label"><span class="label-text">Date</span></label>
-        <input type="date" name="date" id="date" class="input input-bordered bg-white w-full" required>
+        <input type="date" name="date" id="date" class="input input-bordered  w-full" required>
       </div>
 
       <!-- Source -->
