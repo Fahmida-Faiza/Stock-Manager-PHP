@@ -10,6 +10,10 @@ if (!$conn){
   die("sorry" . mysqli_connect_error());
 
 }
+
+
+
+
 $sno = $_GET['id'];
 $sql = "SELECT * FROM stock WHERE sno = $sno";
 $result = mysqli_query($conn, $sql);

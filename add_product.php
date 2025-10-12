@@ -16,6 +16,40 @@ if (!$conn){
 
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
+// exit();
+if(isset ( $_POST['snoEdit'])){
+  // update the record
+$sno= $_POST["snoEdit"];
+$date= $_POST["dateEdit"];
+$source= $_POST["sourceEdit"];
+$model= $_POST["modelEdit"];
+$ram= $_POST["ramEdit"];
+$ime= $_POST["imeEdit"];
+$buying= $_POST["buyingEdit"];
+
+
+
+$sql ="UPDATE `stock` SET   `date` = '$date'  ,  `source` = '$source', `model` = '$model', `ram`= '$ram' , `ime` = '$ime' , `buying`= '$buying'      WHERE `stock`.`sno` = $sno";
+$result = mysqli_query($conn, $sql);
+
+
+  if($result){
+    echo "update record sucessfully";
+  }
+  else{
+    echo "couldnot update ";
+  }
+}
+
+// 
+
+else{
+
+
+
+
+
+
 $date= $_POST["date"];
 $source= $_POST["source"];
 $model= $_POST["model"];
@@ -38,7 +72,7 @@ else{
 }
 
 
-
+}
 
 
 
