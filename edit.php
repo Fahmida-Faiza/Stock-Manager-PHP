@@ -97,19 +97,19 @@ $dateValue = date('Y-m-d', strtotime($row['date']));
       <!-- RAM/ROM -->
       <div>
         <label class="label"><span class="label-text">RAM/ROM</span></label>
-        <input type="text" name="ram" id="ram" class="input input-bordered bg-white w-full" placeholder="e.g. 8/128GB">
+        <input type="text" name="ramEdit" id="ramEdit" class="input input-bordered bg-white w-full"      value="<?php echo $row['ram']; ?>"      placeholder="e.g. 8/128GB">
       </div>
 
       <!-- IMEI -->
       <div>
         <label class="label"><span class="label-text">IMEI</span></label>
-        <input type="text" name="ime" id="ime"   class="input input-bordered bg-white w-full" placeholder="IMEI Number">
+        <input type="text" name="imeEdit" id="imeEdit"   class="input input-bordered bg-white w-full"   value="<?php echo $row['ime']; ?>"  placeholder="IMEI Number">
       </div>
 
       <!-- Buying Price -->
       <div>
         <label class="label"><span class="label-text">Buying Price</span></label>
-        <input type="number" name="buying" id="buying" class="input input-bordered bg-white w-full" placeholder="Buying Price">
+        <input type="number" name="buyingEdit" id="buyingEdit" class="input input-bordered bg-white w-full"   value="<?php echo $row['buying']; ?>"   placeholder="Buying Price">
       </div>
 
       

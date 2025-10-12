@@ -196,12 +196,18 @@ while($row = mysqli_fetch_assoc($result)){
       let date = tr.getElementsByTagName("td")[0].innerText;
       let source = tr.getElementsByTagName("td")[1].innerText;
       let model = tr.getElementsByTagName("td")[2].innerText;
+      let ram = tr.getElementsByTagName("td")[3].innerText;
+      let ime = tr.getElementsByTagName("td")[4].innerText;
+      let buying = tr.getElementsByTagName("td")[5].innerText;
 
-      console.log(date, source, model);
+      console.log(date, source, model, ram,ime,buying);
 
         dateEdit.value= date;
         sourceEdit.value= source;
         modelEdit.value=model;
+        ramEdit.value=ram;
+        imeEdit.value=ime;
+        buyingEdit.value=buying;
         snoEdit.value= e.target.id;
         console.log(e.target.id);
 
