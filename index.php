@@ -1,5 +1,3 @@
-
-
 <?php
 $servername= "localhost";
 $username="root";
@@ -9,40 +7,31 @@ $database="stock";
 $conn= mysqli_connect($servername, $username, $password,$database);
 if (!$conn){
   die("sorry" . mysqli_connect_error());
+}
 
+// ====== DELETE LOGIC ======
+// MUST BE BEFORE HTML OUTPUT
+if(isset($_GET['delete'])){
+  $sno= $_GET['delete'];
+  $sql= "DELETE FROM `stock` WHERE `sno`= $sno";
+  $result = mysqli_query($conn, $sql);
+  // Redirect without alert
+  header("Location: index.php");
+  exit();
 }
 
 
+
+
+
+
+
+
+
+
+
+
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -57,66 +46,40 @@ if (!$conn){
 <link rel="stylesheet" href="//cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css.css">
 <script src="//cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
-
-
-
-
-<!--  -->
-
-
 </head>
 <body class="p-5 bg-white">
 
   <!-- Navbar -->
-  <div class="navbar bg-white shadow-md rounded-xl flex flex-wrap">
+  <div class="navbar   flex flex-wrap bg-gradient-to-r from-indigo-500 to-purple-500 shadow-xl rounded-2xl mb-6 px-4 py-3">
 
     <!-- Left: Logo + Title -->
-    <div class="flex-1">
-      <a href="#" class="btn btn-ghost normal-case text-xl flex items-center gap-2">
+    <div class="flex-1 text-white">
+      <a href="index.php" class="btn btn-ghost normal-case text-xl flex items-center gap-2">
         📱 <span>Stock Manager</span>
       </a>
     </div>
 
     <!-- Right: Buttons + Search -->
     <div class="flex-none flex items-center gap-4">
-      <button onclick="location.href='add_product.php'" class="btn btn-success">+ Add Product</button>
+      <button onclick="location.href='add_product.php'" class="btn btn-success text-white">+ Add Product</button>
+      <button onclick="location.href='blog.php'" class="btn btn-secondary text-white">Blogs</button>
 
-      <!-- Desktop Search -->
-      <div class="hidden md:flex">
-        <div class="form-control">
-          <div class="input-group">
-            <input type="text" placeholder="Search…" class="input input-bordered w-48 md:w-64 bg-white" />
-            <button class="btn btn-square btn-info">🔍</button>
-          </div>
-        </div>
-      </div>
+     
 
-      <!-- Mobile Search -->
-      <div class="dropdown md:hidden">
-        <div tabindex="0" role="button" class="btn btn-ghost">🔍</div>
-        <div class="dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52">
-          <input type="text" placeholder="Search…" class="input input-bordered w-full mb-2 bg-white" />
-          <button class="btn btn-primary w-full">Search</button>
-        </div>
-      </div>
-
-      <button onclick="location.href='login.php'" class="btn btn-ghost">Login</button>
+      <button onclick="location.href='login.php'" class="btn btn-warning">Login</button>
     </div>
   </div>
 
   <!-- Responsive Product Table -->
   <div class="mt-6">
-    <!-- Desktop Table -->
-
-
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.4/js/dataTables.min.js"></script>
 
     <div class="hidden md:block overflow-x-auto shadow-lg rounded-lg border">
-      <table  id="myTable"  class="table table-compact w-full   ">
-        <thead class="bg-gray-200">
+      <table  id="myTable"  class="table table-compact w-full">
+        <thead class="bg-blue-100 text-black">
           <tr>
             <th>SNo</th>
             <th>Date</th>
@@ -125,17 +88,12 @@ if (!$conn){
             <th>RAM/ROM</th>
             <th>IMEI</th>
             <th>Buying Price</th>
-            <!-- <th>Selling Price</th>
-            <th>Profit</th>
-            <th>Status</th> -->
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
 
-
       <?php
-
 $sql = "SELECT * FROM `stock`";
 $result = mysqli_query($conn, $sql);
 $sno = 0;
@@ -149,49 +107,27 @@ while($row = mysqli_fetch_assoc($result)){
     <td>" . $row['ram'] . "</td>
     <td>" . $row['ime'] . "</td>
     <td>" . $row['buying'] . "</td>
-
-    <td> <a  class='edit' href='edit.php?id=".$row['sno']."'>Edit </a>
-     <a  href='/del'>Delete</a>
-     </td>
+    <td>
+      <button class='btn btn-primary'><a class='edit' href='edit.php?id=".$row['sno']."'>Edit</a></button>
+      <button class='btn btn-error delete' id='d".$row['sno']."'>Delete</button>
+    </td>
   </tr>";
 }
-
-
-
 ?>
 
-
-
-
-       
-       
         </tbody>
       </table>
 
-
       <script>
   let table = new DataTable('#myTable');
-
 </script>
 
-<!-- edit -->
-
-
-
-
-
-
-
-
- <script>
-
- 
+<script>
+  // Edit buttons (existing)
   let edits = document.getElementsByClassName('edit');
-
   Array.from(edits).forEach((element) => {
     element.addEventListener("click", (e) => {
       console.log("Edit ");
-
       let tr = e.target.parentNode.parentNode;
       let date = tr.getElementsByTagName("td")[0].innerText;
       let source = tr.getElementsByTagName("td")[1].innerText;
@@ -199,34 +135,31 @@ while($row = mysqli_fetch_assoc($result)){
       let ram = tr.getElementsByTagName("td")[3].innerText;
       let ime = tr.getElementsByTagName("td")[4].innerText;
       let buying = tr.getElementsByTagName("td")[5].innerText;
+      console.log(date, source, model, ram, ime, buying);
 
-      console.log(date, source, model, ram,ime,buying);
-
-        dateEdit.value= date;
-        sourceEdit.value= source;
-        modelEdit.value=model;
-        ramEdit.value=ram;
-        imeEdit.value=ime;
-        buyingEdit.value=buying;
-        snoEdit.value= e.target.id;
-        console.log(e.target.id);
-
-
+      dateEdit.value = date;
+      sourceEdit.value = source;
+      modelEdit.value = model;
+      ramEdit.value = ram;
+      imeEdit.value = ime;
+      buyingEdit.value = buying;
+      snoEdit.value = e.target.id;
+      console.log(e.target.id);
     });
+  });
+
+  // ===== DELETE BUTTON FIX =====
+  document.addEventListener('click', function(e){
+      if(e.target && e.target.classList.contains('delete')){
+          let sno = e.target.id.slice(1); // remove 'd' prefix
+          if(confirm("Are you sure you want to delete this?")){
+              window.location = `/Stock%20Manager%20PHP/index.php?delete=${sno}`;
+          }
+      }
   });
 </script>
 
-
-</script>
-<!-- edit end -->
-
-
-
-
     </div>
-
-
-
-
+  </div>
 </body>
 </html>
